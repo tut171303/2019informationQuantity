@@ -15,7 +15,6 @@ interface FrequencerInterface {     // This interface provides the design for fr
 }
 
 
-
 package s4.specification;
 public interface InformationEstimatorInterface{
     void setTarget(byte target[]); // set the data for computing the information quantities
