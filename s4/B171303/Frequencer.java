@@ -64,8 +64,8 @@ public class Frequencer implements FrequencerInterface{
         // if suffix_i = suffix_j, it returns 0;   
 		
     	for (int k = 0; k < mySpace.length; k++) {
-    		if (suffixArray[i] + k >= mySpace.length) return 0;
-    		else if (suffixArray[j] + k >= mySpace.length) return 0;
+    		if (suffixArray[i] + k >= mySpace.length) return -1;
+    		else if (suffixArray[j] + k >= mySpace.length) return 1;
 	    	if (mySpace[suffixArray[i] + k] > mySpace[suffixArray[j] + k]) return 1;
 	    	else if (mySpace[suffixArray[i] + k] < mySpace[suffixArray[j] + k]) return -1; 
     	}
@@ -261,7 +261,7 @@ public class Frequencer implements FrequencerInterface{
         try {
             frequencerObject = new Frequencer();
             frequencerObject.setSpace("Hi Ho Hi Ho".getBytes());
-            frequencerObject.printSuffixArray(); // you may use this line for DEBUG
+            //frequencerObject.printSuffixArray(); // you may use this line for DEBUG
             /* Example from "Hi Ho Hi Ho"    
                0: Hi Ho                      
                1: Ho                         
