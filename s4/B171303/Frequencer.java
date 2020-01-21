@@ -87,6 +87,29 @@ public class Frequencer implements FrequencerInterface{
         // ここに、int suffixArrayをソートするコードを書け。
         // 　順番はsuffixCompareで定義されるものとする。
     	
+    	int h = suffixArray.length * 10 / 13;
+    
+    	while (true) {
+        	int swaps = 0;
+        	for (int i = 0; i + h < suffixArray.length; ++i) {
+            	if (suffixCompare(i, i+h) == 1) {
+                	int t = suffixArray[i];
+    				suffixArray[i] = suffixArray[i+h];
+    				suffixArray[i+h] = t;
+            	    ++swaps;
+            	}
+        	}
+        	if (h == 1) {
+            	if (swaps == 0) {
+                	break;
+            	}
+        	} else {
+            	h = h * 10 / 13;
+        	}
+    	}
+    	
+    	
+    	/*
     	int t;
     	for (int i = 0; i < suffixArray.length - 1; i++) {
     		for (int j = i + 1; j < suffixArray.length; j++) {
@@ -98,7 +121,7 @@ public class Frequencer implements FrequencerInterface{
     			}
     		}
     	}
-    	
+    	*/
     }
 
     // Suffix Arrayを用いて、文字列の頻度を求めるコード
@@ -259,6 +282,7 @@ public class Frequencer implements FrequencerInterface{
     public static void main(String[] args) {
         Frequencer frequencerObject;
         try {
+        	long start = System.currentTimeMillis();
             frequencerObject = new Frequencer();
             frequencerObject.setSpace("Hi Ho Hi Ho".getBytes());
             //frequencerObject.printSuffixArray(); // you may use this line for DEBUG
@@ -284,6 +308,8 @@ public class Frequencer implements FrequencerInterface{
             int result = frequencerObject.frequency();
             System.out.print("Freq = "+ result+" ");
             if(4 == result) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+        	long end = System.currentTimeMillis();
+			System.out.println((end - start)  + "ms");
         }
         catch(Exception e) {
             System.out.println("STOP");
