@@ -4,7 +4,7 @@ import s4.specification.*;
 
 
 /*package s4.specification;
-  ã“ã“ã¯ã€ï¼‘å›ã€ï¼’å›ã¨å¤‰æ›´ã®ãªã„å¤–éƒ¨ä»•æ§˜ã§ã‚ã‚‹ã€‚
+  ‚±‚±‚ÍA‚P‰ñA‚Q‰ñ‚Æ•ÏX‚Ì‚È‚¢ŠO•”d—l‚Å‚ ‚éB
   public interface FrequencerInterface {     // This interface provides the design for frequency counter.
   void setTarget(byte  target[]); // set the data to search.
   void setSpace(byte  space[]);  // set the data to be searched target from.
@@ -26,7 +26,7 @@ public class Frequencer implements FrequencerInterface{
     boolean targetReady = false;
     boolean spaceReady = false;
 
-    int []  suffixArray; // Suffix Arrayã®å®Ÿè£…ã«ä½¿ã†ãƒ‡ãƒ¼ã‚¿ã®å‹ã‚’int []ã¨ã›ã‚ˆã€‚
+    int []  suffixArray; // Suffix Array‚ÌÀ‘•‚Ég‚¤ƒf[ƒ^‚ÌŒ^‚ğint []‚Æ‚¹‚æB
 
 
     // The variable, "suffixArray" is the sorted array of all suffixes of mySpace.                                    
@@ -48,8 +48,8 @@ public class Frequencer implements FrequencerInterface{
     }
 
     private int suffixCompare(int i, int j) {
-        // suffixCompareã¯ã‚½ãƒ¼ãƒˆã®ãŸã‚ã®æ¯”è¼ƒãƒ¡ã‚½ãƒƒãƒ‰ã§ã‚ã‚‹ã€‚
-        // æ¬¡ã®ã‚ˆã†ã«å®šç¾©ã›ã‚ˆã€‚
+        // suffixCompare‚Íƒ\[ƒg‚Ì‚½‚ß‚Ì”äŠrƒƒ\ƒbƒh‚Å‚ ‚éB
+        // Ÿ‚Ì‚æ‚¤‚É’è‹`‚¹‚æB
         // comparing two suffixes by dictionary order.
         // suffix_i is a string starting with the position i in "byte [] mySpace".
         // Each i and j denote suffix_i, and suffix_j.                            
@@ -72,9 +72,8 @@ public class Frequencer implements FrequencerInterface{
         return 0;
     }
 
-
     public void setSpace(byte []space) { 
-        // suffixArrayã®å‰å‡¦ç†ã¯ã€setSpaceã§å®šç¾©ã›ã‚ˆã€‚
+        // suffixArray‚Ì‘Oˆ—‚ÍAsetSpace‚Å’è‹`‚¹‚æB
         mySpace = space; if(mySpace.length>0) spaceReady = true;
     	
         // First, create unsorted suffix array.
@@ -85,8 +84,31 @@ public class Frequencer implements FrequencerInterface{
             suffixArray[i] = i; // Please note that each suffix is expressed by one integer.      
         }
         //                                            
-        // ã“ã“ã«ã€int suffixArrayã‚’ã‚½ãƒ¼ãƒˆã™ã‚‹ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ã‘ã€‚
-        // ã€€é †ç•ªã¯suffixCompareã§å®šç¾©ã•ã‚Œã‚‹ã‚‚ã®ã¨ã™ã‚‹ã€‚
+        // ‚±‚±‚ÉAint suffixArray‚ğƒ\[ƒg‚·‚éƒR[ƒh‚ğ‘‚¯B
+        // @‡”Ô‚ÍsuffixCompare‚Å’è‹`‚³‚ê‚é‚à‚Ì‚Æ‚·‚éB
+    	
+    	/*
+    	int h = suffixArray.length * 10 / 13;
+    
+    	while (true) {
+        	int swaps = 0;
+        	for (int i = 0; i + h < suffixArray.length; ++i) {
+            	if (suffixCompare(i, i+h) == 1) {
+                	int t = suffixArray[i];
+    				suffixArray[i] = suffixArray[i+h];
+    				suffixArray[i+h] = t;
+            	    ++swaps;
+            	}
+        	}
+        	if (h == 1) {
+            	if (swaps == 0) {
+                	break;
+            	}
+        	} else {
+            	h = h * 10 / 13;
+        	}
+    	}
+    	*/
     	
     	int t;
     	for (int i = 0; i < suffixArray.length - 1; i++) {
@@ -99,10 +121,11 @@ public class Frequencer implements FrequencerInterface{
     			}
     		}
     	}
+    	
     }
 
-    // Suffix Arrayã‚’ç”¨ã„ã¦ã€æ–‡å­—åˆ—ã®é »åº¦ã‚’æ±‚ã‚ã‚‹ã‚³ãƒ¼ãƒ‰
-    // ã“ã“ã‹ã‚‰ã€æŒ‡å®šã™ã‚‹ç¯„å›²ã®ã‚³ãƒ¼ãƒ‰ã¯å¤‰æ›´ã—ã¦ã¯ãªã‚‰ãªã„ã€‚
+    // Suffix Array‚ğ—p‚¢‚ÄA•¶š—ñ‚Ì•p“x‚ğ‹‚ß‚éƒR[ƒh
+    // ‚±‚±‚©‚çAw’è‚·‚é”ÍˆÍ‚ÌƒR[ƒh‚Í•ÏX‚µ‚Ä‚Í‚È‚ç‚È‚¢B
 
     public void setTarget(byte [] target) {
         myTarget = target; if(myTarget.length>0) targetReady = true;
@@ -133,11 +156,11 @@ public class Frequencer implements FrequencerInterface{
     	//System.out.println("first : " + first + ", last1 : " + last1);
         return last1 - first;
     }
-    // å¤‰æ›´ã—ã¦ã¯ã„ã‘ãªã„ã‚³ãƒ¼ãƒ‰ã¯ã“ã“ã¾ã§ã€‚
+    // •ÏX‚µ‚Ä‚Í‚¢‚¯‚È‚¢ƒR[ƒh‚Í‚±‚±‚Ü‚ÅB
 
     private int targetCompare(int i, int j, int k) {
-        // suffixArrayã‚’æ¢ç´¢ã™ã‚‹ã¨ãã«ä½¿ã†æ¯”è¼ƒé–¢æ•°ã€‚
-        // æ¬¡ã®ã‚ˆã†ã«å®šç¾©ã›ã‚ˆ
+        // suffixArray‚ğ’Tõ‚·‚é‚Æ‚«‚Ég‚¤”äŠrŠÖ”B
+        // Ÿ‚Ì‚æ‚¤‚É’è‹`‚¹‚æ
         // suffix_i is a string in mySpace starting at i-th position.
         // target_i_k is a string in myTarget start at j-th postion ending k-th position.
         // comparing suffix_i and target_j_k.
@@ -158,18 +181,18 @@ public class Frequencer implements FrequencerInterface{
         // "Ho"      <     "Ho "   : "Ho " is not in the head of suffix "Ho"
         // "Ho"      =     "H"     : "H" is in the head of suffix "Ho"
         //
-        // ã“ã“ã«æ¯”è¼ƒã®ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ã‘ 
+        // ‚±‚±‚É”äŠr‚ÌƒR[ƒh‚ğ‘‚¯ 
         //
     	
     	if (mySpace[suffixArray[i] + j] > myTarget[k]) return 1;
     	else if (mySpace[suffixArray[i] + j] < myTarget[k]) return -1;
-        return 0; // ã“ã®è¡Œã¯å¤‰æ›´ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚
+        return 0; // ‚±‚Ìs‚Í•ÏX‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B
     }
 
 
     private int subByteStartIndex(int start, int end) {
-        //suffix arrayã®ãªã‹ã§ã€ç›®çš„ã®æ–‡å­—åˆ—ã®å‡ºç¾ãŒå§‹ã¾ã‚‹ä½ç½®ã‚’æ±‚ã‚ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
-        // ä»¥ä¸‹ã®ã‚ˆã†ã«å®šç¾©ã›ã‚ˆã€‚
+        //suffix array‚Ì‚È‚©‚ÅA–Ú“I‚Ì•¶š—ñ‚ÌoŒ»‚ªn‚Ü‚éˆÊ’u‚ğ‹‚ß‚éƒƒ\ƒbƒh
+        // ˆÈ‰º‚Ì‚æ‚¤‚É’è‹`‚¹‚æB
         /* Example of suffix created from "Hi Ho Hi Ho"
            0: Hi Ho
            1: Ho
@@ -191,25 +214,25 @@ public class Frequencer implements FrequencerInterface{
         // Assuming the suffix array is created from "Hi Ho Hi Ho",                 
         // if target_start_end is "Ho ", it will return 6.                
         //                                                                          
-        // ã“ã“ã«ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã›ã‚ˆã€‚                                                 
+        // ‚±‚±‚ÉƒR[ƒh‚ğ‹Lq‚¹‚æB                                                 
         //                                    
     	
     	for (int i = 0; i < suffixArray.length; i++) {
     			boolean success = true;
     			for (int k = 0; k < myTarget.length; k++) {
-    				if (targetCompare(i, k, k) != 0 || k >= mySpace.length - suffixArray[i]) {
+    				if (targetCompare(i, k, k) != 0 || k >= mySpace.length - suffixArray[i] - 1) {
     					success = false; break;
     				}
     			}
     			if (success) return i;
     	}
     	
-        return mySpace.length; //ã“ã®ã‚³ãƒ¼ãƒ‰ã¯å¤‰æ›´ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚          
+        return mySpace.length; //‚±‚ÌƒR[ƒh‚Í•ÏX‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B          
     }
 
     private int subByteEndIndex(int start, int end) {
-        //suffix arrayã®ãªã‹ã§ã€ç›®çš„ã®æ–‡å­—åˆ—ã®å‡ºç¾ã—ãªããªã‚‹å ´æ‰€ã‚’æ±‚ã‚ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
-        // ä»¥ä¸‹ã®ã‚ˆã†ã«å®šç¾©ã›ã‚ˆã€‚
+        //suffix array‚Ì‚È‚©‚ÅA–Ú“I‚Ì•¶š—ñ‚ÌoŒ»‚µ‚È‚­‚È‚éêŠ‚ğ‹‚ß‚éƒƒ\ƒbƒh
+        // ˆÈ‰º‚Ì‚æ‚¤‚É’è‹`‚¹‚æB
         /* Example of suffix created from "Hi Ho Hi Ho"
            0: Hi Ho                                    
            1: Ho                                       
@@ -230,35 +253,36 @@ public class Frequencer implements FrequencerInterface{
         // Assuming the suffix array is created from "Hi Ho Hi Ho",          
         // if target_start_end is"i", it will return 9 for "Hi Ho Hi Ho".    
         //                                                                   
-        //ã€€ã“ã“ã«ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã›ã‚ˆ                                           
+        //@‚±‚±‚ÉƒR[ƒh‚ğ‹Lq‚¹‚æ                                           
         //                                                                   
-        for (int i = suffixArray.length - 1; i > 0; i--) {
+        for (int i = suffixArray.length - 1; i >= 0; i--) {
     			boolean success = true;
     			for (int k = 0; k < myTarget.length; k++) {
-    				if (targetCompare(i, k, k) != 0 || k >= mySpace.length - suffixArray[i]) {
+    				if (targetCompare(i, k, k) != 0 || k >= mySpace.length - suffixArray[i] - 1) {
     					success = false; break;
     				}
     			}
     			if (success) return i + 1;
     	}
     	
-        return mySpace.length; //ã“ã®ã‚³ãƒ¼ãƒ‰ã¯å¤‰æ›´ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚      
+        return mySpace.length; //‚±‚ÌƒR[ƒh‚Í•ÏX‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B      
     }
 
 
-    // Suffix Arrayã‚’ä½¿ã£ãŸãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ›ãƒ¯ã‚¤ãƒˆãƒ†ã‚¹ãƒˆã¯ã€
-    // privateãªãƒ¡ã‚½ãƒƒãƒ‰ã¨ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ã“ã¨ãŒå¿…è¦ãªã®ã§ã€
-    // ã‚¯ãƒ©ã‚¹ã«å±ã™ã‚‹static mainã«æ›¸ãæ–¹æ³•ã‚‚ã‚ã‚‹ã€‚
-    // static mainãŒã‚ã£ã¦ã‚‚ã€å‘¼ã³ã ã•ãªã‘ã‚Œã°ã‚ˆã„ã€‚
-    // ä»¥ä¸‹ã¯ã€è‡ªç”±ã«å¤‰æ›´ã—ã¦å®Ÿé¨“ã™ã‚‹ã“ã¨ã€‚
-    // æ³¨æ„ï¼šæ¨™æº–å‡ºåŠ›ã€ã‚¨ãƒ©ãƒ¼å‡ºåŠ›ã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºã™ã“ã¨ã¯ã€
-    // static mainã‹ã‚‰ã®å®Ÿè¡Œã®ã¨ãã ã‘ã«è¨±ã•ã‚Œã‚‹ã€‚
-    // å¤–éƒ¨ã‹ã‚‰Frequencerã‚’ä½¿ã†ã¨ãã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºåŠ›ã—ã¦ã¯ãªã‚‰ãªã„ã€‚
-    // æ•™å“¡ã®ãƒ†ã‚¹ãƒˆå®Ÿè¡Œã®ã¨ãã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒã§ã‚‹ã¨ã€ä»•æ§˜ã«ãªã„å‹•ä½œã‚’ã™ã‚‹ã¨ã¿ãªã—ã€
-    // æ¸›ç‚¹ã®å¯¾è±¡ã§ã‚ã‚‹ã€‚
+    // Suffix Array‚ğg‚Á‚½ƒvƒƒOƒ‰ƒ€‚ÌƒzƒƒCƒgƒeƒXƒg‚ÍA
+    // private‚Èƒƒ\ƒbƒh‚ÆƒtƒB[ƒ‹ƒh‚ğƒAƒNƒZƒX‚·‚é‚±‚Æ‚ª•K—v‚È‚Ì‚ÅA
+    // ƒNƒ‰ƒX‚É‘®‚·‚éstatic main‚É‘‚­•û–@‚à‚ ‚éB
+    // static main‚ª‚ ‚Á‚Ä‚àAŒÄ‚Ñ‚¾‚³‚È‚¯‚ê‚Î‚æ‚¢B
+    // ˆÈ‰º‚ÍA©—R‚É•ÏX‚µ‚ÄÀŒ±‚·‚é‚±‚ÆB
+    // ’ˆÓF•W€o—ÍAƒGƒ‰[o—Í‚ÉƒƒbƒZ[ƒW‚ğo‚·‚±‚Æ‚ÍA
+    // static main‚©‚ç‚ÌÀs‚Ì‚Æ‚«‚¾‚¯‚É‹–‚³‚ê‚éB
+    // ŠO•”‚©‚çFrequencer‚ğg‚¤‚Æ‚«‚ÉƒƒbƒZ[ƒW‚ğo—Í‚µ‚Ä‚Í‚È‚ç‚È‚¢B
+    // ‹³ˆõ‚ÌƒeƒXƒgÀs‚Ì‚Æ‚«‚ÉƒƒbƒZ[ƒW‚ª‚Å‚é‚ÆAd—l‚É‚È‚¢“®ì‚ğ‚·‚é‚Æ‚İ‚È‚µA
+    // Œ¸“_‚Ì‘ÎÛ‚Å‚ ‚éB
     public static void main(String[] args) {
         Frequencer frequencerObject;
         try {
+        	long start = System.currentTimeMillis(); // ÀsŠÔŒv‘ªŠJn
             frequencerObject = new Frequencer();
             frequencerObject.setSpace("Hi Ho Hi Ho".getBytes());
             //frequencerObject.printSuffixArray(); // you may use this line for DEBUG
@@ -284,6 +308,8 @@ public class Frequencer implements FrequencerInterface{
             int result = frequencerObject.frequency();
             System.out.print("Freq = "+ result+" ");
             if(4 == result) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+        	long end = System.currentTimeMillis(); // ÀsŠÔŒv‘ªI—¹
+			System.out.println((end - start)  + "ms"); // ÀsŠÔ‚Ìo—Í
         }
         catch(Exception e) {
             System.out.println("STOP");
