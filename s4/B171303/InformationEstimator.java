@@ -25,7 +25,10 @@ public class InformationEstimator implements InformationEstimatorInterface{
 	// corresponding to substring of String for  byte[] ,
 	// It is not implement in class library because internal structure of byte[] requires copy.
 	byte [] result = new byte[end - start];
-	for(int i = 0; i<end - start; i++) { result[i] = x[start + i]; };
+		for(int i = 0; i<(end - start); i++) { 
+			result[i] = x[start + i]; 
+			//System.out.print("("+x[start + i]+"),"); 
+		}
 	return result;
     }
 
@@ -34,8 +37,10 @@ public class InformationEstimator implements InformationEstimatorInterface{
 	double [] iqs;
 	
     double iq(int freq) {
-    	if (!isIqCalculated[freq]) {	// iq‚ªŒvŽZ‚³‚ê‚Ä‚¢‚È‚¢
+    	if (!isIqCalculated[freq]) {	// iqãŒè¨ˆç®—ã•ã‚Œã¦ã„ãªã„
+    		//System.out.println("freq="+freq);
     		iqs[freq] = - Math.log10((double) freq / (double) mySpace.length)/ Math.log10((double) 2.0);
+    		//System.out.println("iqs="+iqs[freq]);
     		isIqCalculated[freq] = true;
     	}
 		return iqs[freq];
@@ -50,7 +55,7 @@ public class InformationEstimator implements InformationEstimatorInterface{
     public double estimation(){
 		boolean [] partition = new boolean[myTarget.length+1];
     	
-    	// iq‚Ì‰Šú‰»
+    	// iqã®åˆæœŸåŒ–
     	isIqCalculated = new boolean[mySpace.length + 1];
     	iqs = new double[mySpace.length + 1];
     	
@@ -72,22 +77,22 @@ public class InformationEstimator implements InformationEstimatorInterface{
 
 		    // Compute Information Quantity for the partition, in "value1"
 		    // value1 = IQ(#"ab")+IQ(#"cde")+IQ(#"fg") for the above example
-	            double value1 = (double) 0.0;
-		    int end = 0;;
+	        double value1 = (double) 0.0;
+		    int end = 0;
 		    int start = end;
 		    while(start<myTarget.length) {
-			// System.out.write(myTarget[end]);
-			end++;;
-			while(partition[end] == false) { 
-			    // System.out.write(myTarget[end]);
-			    end++;
-			}
-			 //System.out.print("("+start+","+end+")");
-			myFrequencer.setTarget(subBytes(myTarget, start, end));
-			value1 = value1 + iq(myFrequencer.frequency());
-			start = end;
+				//System.out.write(myTarget[end]);
+				end++;
+				while(partition[end] == false) { 
+			    	//System.out.write(myTarget[end]);
+			    	end++;
+				}
+				//System.out.print("("+start+","+end+")");
+				myFrequencer.setTarget(subBytes(myTarget, start, end));
+				value1 = value1 + iq(myFrequencer.frequency());
+				start = end;
 		    }
-		    // System.out.println(" "+ value1);
+		    //System.out.println("value1="+ value1);
 
 		    // Get the minimal value in "value"
 		    if(value1 < value) value = value1;
@@ -113,7 +118,7 @@ public class InformationEstimator implements InformationEstimatorInterface{
 		myObject.setTarget("00".getBytes());
 		value = myObject.estimation();
 		System.out.println(">00 "+value);
-    	
+    	/*
     	myObject.setTarget("03".getBytes());
 		value = myObject.estimation();
 		System.out.println(">03 "+value);
@@ -121,11 +126,7 @@ public class InformationEstimator implements InformationEstimatorInterface{
     	myObject.setTarget("33".getBytes());
 		value = myObject.estimation();
 		System.out.println(">33 "+value);
-    	
+    	*/
     }
 }
-				  
-			       
 
-	
-    
